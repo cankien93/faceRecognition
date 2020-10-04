@@ -1,5 +1,5 @@
 {
-  "name": "facedetect",
+  "name": "facerecognition",
   "homepage": "https://cankien93.github.io/facedetect",
   "version": "0.1.0",
   "private": true,
@@ -8,11 +8,12 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "clarifai": "^2.9.1",
+    "gh-pages": "^2.2.0",
     "node": "^14.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-particles-js": "^3.0.3",
-    "react-scripts": "3.2",
+    "react-scripts": "^3.4.1",
     "react-tilt": "^0.1.4",
     "tachyons": "^4.11.1"
   },
@@ -50,8 +51,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cankien93/facedetect/issues"
-  },
-  "devDependencies": {
-    "gh-pages": "^2.2.0"
   }
 }
