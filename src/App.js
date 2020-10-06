@@ -106,7 +106,7 @@ class App extends Component {
           ?<div>
             <Logo />
             <Rank name={this.state.user.name} entries={this.state.user.entries}/>
-            <Link input={this.onChangeInput} submpsit={this.onSubmit}/>
+            <Link input={this.onChangeInput} submit={this.onSubmit}/>
             <FaceImage url={this.state.inputUrl} box={this.state.box}/>
           </div>
           :this.state.route === 'signin'
