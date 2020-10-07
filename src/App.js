@@ -65,7 +65,7 @@ class App extends Component {
   }
   
   onSubmit = () =>{
-
+    console.log(this.state);
     this.setState({
       inputUrl: this.state.input,
       box: []
@@ -92,11 +92,9 @@ class App extends Component {
         .then(count=> {
           this.setState(Object.assign(this.state.user, {entries: count}))
         })
-        .catch(console.log);
         this.faceCaculator(response);
       }
     })
-    .catch(err => console.log(err))
   }
 
   onRouteChange = (newRoute) =>{
