@@ -8,11 +8,11 @@ import SignIn from './component/Signin/signin';
 import Register from './component/Register/Register';
 import ChangePassword from './component/changePassword';
 
-
+//logging out all state is cleared
 const initialState = {
   input: '',
   inputUrl: '',
-  box: {},
+  box: [],
   route: 'signin',
   isSignedIn: false,
   user: {
@@ -46,21 +46,30 @@ class App extends Component {
   }
 
   faceCaculator = (response)=>{
-    const data = response.outputs[0].data.regions[0].region_info.bounding_box;
+    const data = response.outputs[0].data.regions
+    // .region_info.bounding_box;
     const domImg = document.getElementById('faceDetector');
     const width = domImg.width;
     const height = domImg.height;
-    this.setState({box: {
-      left: data.left_col*width,
-      top: data.top_row*height,
-      right: width - data.right_col*width,
-      bottom: height - data.bottom_row*height
-    }}) 
+    
+    const boxes = data.map(box=>({
+      left: box.region_info.bounding_box.left_col*width,
+      top: box.region_info.bounding_box.top_row*height,
+      right: width - box.region_info.bounding_box.right_col*width,
+      bottom: height - box.region_info.bounding_box.bottom_row*height
+    }))
+    this.setState({box: this.state.box.concat(boxes)}) 
+    
+    
     console.log(this.state.box)
   }
   
   onSubmit = () =>{
-    this.setState({inputUrl: this.state.input});
+
+    this.setState({
+      inputUrl: this.state.input,
+      box: []
+    });
       // Predict the contents of an image by passing in a URL.
     fetch('https://secret-eyrie-25986.herokuapp.com/imageurl', {
       method: 'post',
@@ -82,15 +91,17 @@ class App extends Component {
         .then(res=>res.json())
         .then(count=> {
           this.setState(Object.assign(this.state.user, {entries: count}))
-        });
+        })
+        .catch(console.log);
         this.faceCaculator(response);
       }
     })
+    .catch(err => console.log(err))
   }
 
   onRouteChange = (newRoute) =>{
     if(newRoute ==='signin'){
-      this.setState(initialState)
+      this.setState(initialState) // clear state when sign out
     }else if(newRoute === 'home'){
       this.setState({isSignedIn: true})
     }
