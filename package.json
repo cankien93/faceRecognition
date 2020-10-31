@@ -1,6 +1,6 @@
 {
   "name": "facerecognition",
-  "homepage": "https://cankien93.github.io/faceRecognition",
+  "homepage": "http://face-detect-app.byethost13.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,11 +13,10 @@
     "react-particles-js": "^3.0.3",
     "react-scripts": "^3.4.1",
     "react-tilt": "^0.1.4",
+    "reactstrap": "^8.6.0",
     "tachyons": "^4.11.1"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -1,12 +1,14 @@
 import React from 'react';
+import ProfileIcon from '../Profile/ProfileIcon';
 
-const Nav = ({onRouteChange, isSignedIn})=>{
+const Nav = ({onRouteChange, isSignedIn, toggleModal})=>{
     
     if (isSignedIn){
         return(
             <div className='flex justify-end mr2'>
-                <p onClick={()=>onRouteChange('changePassword')} className='f3 pa2 link dim pointer black dropbtn'>Change Password</p>
-                <p onClick={()=>onRouteChange('signin')} className='f3 pa2 link dim pointer black dropbtn'>Sign Out</p>
+                <ProfileIcon onRouteChange={onRouteChange} toggleModal={toggleModal}/>
+                {/* <p onClick={()=>onRouteChange('changePassword')} className='f3 pa2 link dim pointer black dropbtn'>Change Password</p>
+                <p onClick={()=>onRouteChange('signin')} className='f3 pa2 link dim pointer black dropbtn'>Sign Out</p> */}
             </div>
         )
     } else {

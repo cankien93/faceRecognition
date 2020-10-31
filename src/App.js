@@ -6,15 +6,17 @@ import Link from './component/Link/Link';
 import FaceImage from './component/FaceImage/FaceImage';
 import SignIn from './component/Signin/signin';
 import Register from './component/Register/Register';
+import Modal from './component/Modal/Modal'
 import ChangePassword from './component/changePassword';
-
+import Profile from './component/Profile/Profile';
 //logging out all state is cleared
 const initialState = {
   input: '',
   inputUrl: '',
   box: [],
   route: 'signin',
-  isSignedIn: false,
+  isSignedIn: false,//false->true
+  isProfileOpen: false,
   user: {
     id: '102',
     name: '',
@@ -59,9 +61,6 @@ class App extends Component {
       bottom: height - box.region_info.bounding_box.bottom_row*height
     }))
     this.setState({box: this.state.box.concat(boxes)}) 
-    
-    
-    console.log(this.state.box)
   }
   
   onSubmit = () =>{
@@ -105,12 +104,29 @@ class App extends Component {
     }
     this.setState({route: newRoute});
   }
+  toggleModal = ()=>{
+    this.setState(prevState=>({
+      ...prevState,
+      isProfileOpen: !prevState.isProfileOpen
+    }))
+  }
 
   render(){
+    const {isProfileOpen, user} = this.state
     return (
       <div className="App">
-
-        <Nav onRouteChange={this.onRouteChange} isSignedIn={this.state.isSignedIn}/>
+        
+        <Nav onRouteChange={this.onRouteChange} isSignedIn={this.state.isSignedIn} toggleModal={this.toggleModal}/>
+        { isProfileOpen &&
+          <Modal>
+            <Profile 
+              isProfileOpen={isProfileOpen} 
+              toggleModal={this.toggleModal}
+              user={user}
+              loadUser={this.loadUser}
+              />
+          </Modal>
+        }
         { this.state.route === 'home'
           ?<div>
             <Logo />
